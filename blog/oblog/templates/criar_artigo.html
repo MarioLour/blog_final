@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+Criar novo Post
+{% endblock %}
+{% block content %}
+
+<h1>Criar Post</h1>
+<br/><br/>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="titulo_url">Título URL:</label>
+        <input type="text" id="titulo_url" name="titulo_url" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="imagem">Imagem:</label>
+        <input type="file" id="imagem" name="imagem" class="form-control-file">
+    </div>
+    <div class="form-group">
+        <label for="corpo">Corpo:</label>
+        <textarea id="corpo" name="corpo" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="categoria">Categoria:</label>
+        <input type="text" id="categoria" name="categoria" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-secondary">Criar</button>
+</form>
+{% endblock %}

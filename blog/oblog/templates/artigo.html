@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ post.titulo_url }}
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ post.titulo }}</h1>
+<small>By: {{post.autor.first_name}} {{post.autor.last_name}} - {{ post.data_publicada }}</small>
+<small>
+    <a href="{% url 'editar' post.pk %}">Editar Post</a>
+    <a href="{% url 'excluir' post.pk %}">Excluir Post</a>
+</small><br/><br/>
+
+{% if post.imagem %}
+    <img src="{{ post.imagem.url }}" alt="Imagem do Post">
+{% endif %}
+
+<br/><br/>
+{{ post.corpo }}
+
+<h2><small>Comentários</small></h2>
+<br/>
+{% if not post.comentarios.all %}
+    Sem comentários ainda... <a href="#">Adicionar um</a>
+{% else %}
+    <br/><br/>
+    <a href="#">Adicionar Comentário</a>
+    {% for comment in post.comentarios.all %}
+        <strong>
+            <br/><br/>
+            {{ comment.name }} - {{ comment.date_added }}
+        </strong>
+        <br/>
+        {{ comment.body }}
+        <br/><br/>
+    {% endfor %}
+{% endif %}
+<br/><br/>
+<a href="{% url 'home' %}" class="btn btn-secondary">Voltar</a>
+
+{% endblock %}
