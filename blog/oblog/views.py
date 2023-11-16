@@ -18,6 +18,11 @@ class Artigo(DetailView):
     model = Post
     template_name = "artigo.html"
 
+    def get(self, request, *args, **kwargs):
+        try:
+            return super().get(request, *args, **kwargs)
+        except self.model.DoesNotExist:
+            raise Http404("Post does not exist")
        
 class Criar_Artigo(CreateView):
     model = Post
