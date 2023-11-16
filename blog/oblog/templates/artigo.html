@@ -6,7 +6,7 @@
 {% block content %}
 
 <h1>{{ post.titulo }}</h1>
-<small>By: {{post.autor.first_name}} {{post.autor.last_name}} - {{ post.data_publicada }}</small>
+<small>By: {{ post.autor.first_name }} {{ post.autor.last_name }} - {{ post.data_publicada|date:"d-m-Y" }}</small>
 <small>
     <a href="{% url 'editar' post.pk %}">Editar Post</a>
     <a href="{% url 'excluir' post.pk %}">Excluir Post</a>
@@ -17,7 +17,7 @@
 {% endif %}
 
 <br/><br/>
-{{ post.corpo }}
+{{ post.corpo|safe }}  
 
 <h2><small>Comentários</small></h2>
 <br/>

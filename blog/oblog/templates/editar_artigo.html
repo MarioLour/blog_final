@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block title %}
 Editar Post
 {% endblock %}
@@ -10,15 +9,7 @@ Editar Post
 <div class="form-group">
     <form method="post">
         {% csrf_token %}
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo" value="{{ post.titulo }}"><br>
-
-        <label for="corpo">Corpo:</label><br>
-        <textarea id="corpo" name="corpo" rows="4" cols="50">{{ post.corpo }}</textarea><br>
-
-        <label for="categoria">Categoria:</label>
-        <input type="text" id="categoria" name="categoria" value="{{ post.categoria }}"><br>
-
+        {{ form.as_p }}
         <button type="submit" class="btn btn-secondary">Editar</button>
     </form>
 </div>

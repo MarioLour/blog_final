@@ -6,14 +6,17 @@
 <ul>
 {% for post in posts %}
     <li>
-        <a href="{% url 'Artigo' post.pk %}">{{ post.titulo }}</a> - {{ post.autor.first_name }} - 
-        {{ post.autor.last_name }} - {{ post.data_publicada }} - <a href="#">{{ post.categoria }}</a>
-        <small>
+        <a href="{% url 'Artigo' post.pk %}">{{ post.titulo }}</a>        
+         <small>
             <a href="{% url 'editar' post.pk %}">Editar Post</a>
             <a href="{% url 'excluir' post.pk %}">Excluir Post</a>
         </small>
         <br/>
-        {{ post.corpo }}
+        Autor: {{ post.autor.first_name }}  {{ post.autor.last_name }} 
+        <br/>
+        Data de publicação: {{ post.data_publicada |date:"d-m-Y" }} &nbsp;&nbsp;&nbsp;&nbsp; Categoria: <a href="#">{{ post.categoria }}</a>
+        <br/>
+        {{ post.corpo|safe }}
     </li>
 {% endfor %}
 </ul>

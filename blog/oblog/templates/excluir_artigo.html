@@ -1,21 +1,18 @@
 {% extends 'base.html' %}
-{% block title%}
+{% block title %}
 Deletar artigo
-{%endblock%}
-{% block content%}
-
+{% endblock %}
+{% block content %}
 
 <hl>Deletar Artigo</hl>
 <br/><br/>
-<h3>Deletar:{{post.title}}</h3>
-
+<h3>Deletar: {{ post.titulo }}</h3>
 
 <div class="form-group">
-    <form method="Post">
+    <form method="post">
         {% csrf_token %}
-        <h4>Voce tem certeza ?</h4>
-        <button class="btn btn-secondary">Excluir</button> <a href="{%url 'home' %}"class="btn btn-secondary">Não</a>
-
+        <h4>Tem certeza que deseja excluir este artigo?</h4>
+        <button class="btn btn-secondary">Excluir</button> <a href="{% url 'home' %}" class="btn btn-secondary">Não</a>
+    </form>
 </div>
-</form>
-{%endblock%}
+{% endblock %}
