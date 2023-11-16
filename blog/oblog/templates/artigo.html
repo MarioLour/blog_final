@@ -19,22 +19,23 @@
 <br/><br/>
 {{ post.corpo|safe }}  
 
-<h2><small>Comentários</small></h2>
+<h2><small>Comentarios</small></h2>
 <br/>
-{% if not post.comentarios.all %}
-    Sem comentários ainda... <a href="#">Adicionar um</a>
-{% else %}
-    <br/><br/>
-    <a href="#">Adicionar Comentário</a>
-    {% for comment in post.comentarios.all %}
+{%if not post.Comentarios.all%}
+    Sem comentarios ainda ...<a href="{% url 'criar_comentario' post.pk%}">
+    Adicionar um</a>
+{%else%}
+<br/><br/>
+<a href="{% url 'criar_comentario' post.pk%}">Adicionar Comentario</a>
+        {%for comment in post.Comentarios.all%}
         <strong>
             <br/><br/>
-            {{ comment.name }} - {{ comment.date_added }}
+            {{comment.name}} - {{comment.date_added}}
         </strong>
         <br/>
-        {{ comment.body }}
+        {{comment.body}}
         <br/><br/>
-    {% endfor %}
+        {% endfor %}
 {% endif %}
 <br/><br/>
 <a href="{% url 'home' %}" class="btn btn-secondary">Voltar</a>
