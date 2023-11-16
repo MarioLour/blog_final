@@ -1,11 +1,11 @@
 from django.urls import path
-from . import views
+from .views import Home,Artigo,Editar_Artigo,Criar_Artigo,Excluir_Artigo
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('post/criar/', views.create_post, name='criar'),
-    path('post/<int:pk>/', views.view_post, name='Artigo'),
-    path('post/editar/<int:pk>/', views.edit_post, name='editar'),
-    path('post/deletar/<int:pk>/', views.delete_post, name='excluir'),
+    path('',Home.as_view(),name="home"),
+    path('artigos/<int:pk>',Artigo.as_view(),name="Artigo"),
+    path('criar_artigo/',Criar_Artigo.as_view(),name="criar"),
+    path('artigos/editar/<int:pk>',Editar_Artigo.as_view(),name="editar"),
+    path('artigos/<int:pk>/excluir',Excluir_Artigo.as_view(),name='excluir'),
     # Outras URLs do aplicativo 'blog', se houver
 ]

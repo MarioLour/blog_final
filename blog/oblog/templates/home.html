@@ -4,7 +4,7 @@
 <h1>Posts</h1>
 
 <ul>
-{% for post in posts %}
+{% for post in object_list %}
     <li>
         <a href="{% url 'Artigo' post.pk %}">{{ post.titulo }}</a>        
          <small>
