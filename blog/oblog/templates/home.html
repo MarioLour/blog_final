@@ -14,7 +14,12 @@
         <br/>
         Autor: {{ post.autor.first_name }}  {{ post.autor.last_name }} 
         <br/>
-        Data de publicação: {{ post.data_publicada |date:"d-m-Y" }} &nbsp;&nbsp;&nbsp;&nbsp; Categoria: <a href="#">{{ post.categoria }}</a>
+        Data de publicação: {{ post.data_publicada |date:"d-m-Y" }} &nbsp;&nbsp;&nbsp;&nbsp; Categoria:
+        {% for categoria in post.categorias.all %}
+            <a href="{% url 'categoria' pk=categoria.pk %}">{{ categoria.nome }}</a>{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            Sem categoria
+        {% endfor %}
         <br/>
         {{ post.corpo|safe }}
     </li>

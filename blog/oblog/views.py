@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
-from .models import Post,Comment
+from .models import Post,Comment,Category
 from .forms import Modelo_Artigo,Artigo_Editado,Comentario_Editado
 from django.urls import reverse_lazy
 from django.http import Http404
@@ -11,8 +11,6 @@ class Home(ListView):
     model = Post
     template_name = 'home.html'
     ordering = ['-data_publicada']
-
-
 
 
 class Artigo(DetailView):
@@ -50,3 +48,22 @@ class Comment(CreateView):
         return super().form_valid(form)
     def get_success_url(self):
         return reverse_lazy('Artigo', kwargs={'pk': self.kwargs['pk']})    
+
+class CategoryList(ListView):
+    model = Category
+    template_name = 'lista_categorias.html'
+    context_object_name = 'categories'
+
+    def get_queryset(self):
+        return Category.objects.all()
+
+class CategoryDetail(DetailView):
+    model = Category
+    template_name = 'categoria.html'
+    context_object_name = 'category'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category = self.get_object()
+        context['posts'] = category.post_set.all()  
+        return context

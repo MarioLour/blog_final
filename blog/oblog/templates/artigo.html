@@ -18,24 +18,33 @@
 
 <br/><br/>
 {{ post.corpo|safe }}  
+<br/><br/>
+<h2><small>Categorias:</small></h2>
+<ul>
+    {% for categoria in post.categorias.all %}
+        <a href="{% url 'categoria' pk=categoria.pk %}">{{ categoria.nome }}</a>{% if not forloop.last %}, {% endif %}
+    {% empty %}
+        Sem categoria
+    {% endfor %}
+</ul>
 
 <h2><small>Comentarios</small></h2>
 <br/>
-{%if not post.Comentarios.all%}
+{% if not post.Comentarios.all %}
     Sem comentarios ainda ...<a href="{% url 'criar_comentario' post.pk%}">
     Adicionar um</a>
-{%else%}
-<br/><br/>
-<a href="{% url 'criar_comentario' post.pk%}">Adicionar Comentario</a>
-        {%for comment in post.Comentarios.all%}
+{% else %}
+    <br/><br/>
+    <a href="{% url 'criar_comentario' post.pk%}">Adicionar Comentario</a>
+    {% for comment in post.Comentarios.all %}
         <strong>
             <br/><br/>
-            {{comment.name}} - {{comment.date_added}}
+            {{comment.nome}} - {{comment.data_adicionado | date:"d-m-Y"}}
         </strong>
         <br/>
-        {{comment.body}}
+        {{comment.corpo}}
         <br/><br/>
-        {% endfor %}
+    {% endfor %}
 {% endif %}
 <br/><br/>
 <a href="{% url 'home' %}" class="btn btn-secondary">Voltar</a>
