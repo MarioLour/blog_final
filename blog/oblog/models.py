@@ -3,7 +3,13 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import datetime, date
 
+class Category(models.Model):
+    nome = models.CharField(max_length=100)
+    descricao = models.TextField()
 
+    def __str__(self):
+        return self.nome
+    
 class Post(models.Model):
     titulo = models.CharField(max_length=255)
     titulo_url = models.CharField(max_length=255,default="post")
@@ -11,7 +17,7 @@ class Post(models.Model):
     autor = models.ForeignKey(User , on_delete=models.CASCADE)
     corpo = models.TextField()
     data_publicada = models.DateField(auto_now_add=True)
-    categoria = models.CharField(max_length=255)
+    categorias = models.ManyToManyField(Category)
     
 
     def __str__(self):
@@ -22,9 +28,10 @@ class Post(models.Model):
     
 class Comment(models.Model):
     post = models.ForeignKey(Post , related_name="Comentarios" , on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    body = models.TextField()
-    date_added = models.DateField(auto_now_add=True)
+    nome = models.CharField(max_length=255)
+    corpo = models.TextField()
+    data_adicionado = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return '%s - %s' % (self.post.title,self.name)
+        return '%s - %s' % (self.post.titulo,self.nome)
+    
