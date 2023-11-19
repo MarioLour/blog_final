@@ -2,6 +2,6 @@
 # exit on error
 set -o errexit
 
-pip install -r blog_final/requirements.txt
+pip install -r blog/requirements.txt
 
-python blog_final/manage.py collectstatic --no-input
+python blog/manage.py collectstatic --no-input
